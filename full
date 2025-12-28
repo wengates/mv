@@ -1,0 +1,927 @@
+repeat wait() until game:IsLoaded()
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+
+local ScriptUrl = "http://scripts.projectsnare.online/SnareMvsd"
+
+local validKeys = {
+    'snare4a9ce0', 'snare7b3d1f', 'snare2c8e4g', 'snare9d1f5h',
+    'snare6e2a9i', 'snare1f7c0j', 'snare8g3b1k', 'snare0h4d2l',
+    'snare5i9e3m', 'snare3j6f8n', 'snare4k0g7o', 'snare7l1h6p',
+    'snare2m5i9q', 'snare9n8j0r', 'snare6o3k1s', 'snare1p2l8t',
+    'snare8q7m3u', 'snare0r6n4v', 'snare5s9o2w', 'snare3t0p5x',
+    'snare4u1q6y', 'snare7v2r9z', 'snare2w3s8a', 'snare9x4t0b',
+    'snare6y5u7c', 'snare1z6v0d', 'snare8a7w9e', 'snare0b8x3f',
+    'snare5c9y2g', 'snare3d0z1h', 'snare4e1a4i', 'snare7f2b5j',
+    'snare2g3c6k', 'snare9h4d7l', 'snare6i5e8m', 'snare1j6f9n',
+    'snare8k7g0o', 'snare0l8h1p', 'snare5m9i2q', 'snare3n0j3r',
+    'snare4o1k4s', 'snare7p2l5t', 'snare2q3m6u', 'snare9r4n7v',
+    'snare6s5o8w', 'snare1t6p9x', 'snare8u7q0y', 'snare0v8r1z',
+    'snare5w9s2a', 'snare3x0t3b', 'snare4y1u4c', 'snare7z2v5d',
+    'snare2a3w6e', 'snare9b4x7f', 'snare6c5y8g', 'snare1d6z9h',
+    'snare8e7a0i', 'snare0f8b1j', 'snare5g9c2k', 'snare3h0d3l',
+    'snare4i1e4m', 'snare7j2f5n', 'snare2k3g6o', 'snare9l4h7p',
+    'snare6m5i8q', 'snare1n6j9r', 'snare8o7k0s', 'snare0p8l1t',
+    'snare5q9m2u', 'snare3r0n3v', 'snare4s1o4w', 'snare7t2p5x',
+    'snare2u3q6y', 'snare9v4r7z', 'snare6w5s8a', 'snare1x6t9b',
+    'snare8y7u0c', 'snare0z8v1d', 'snare5a9w2e', 'snare3b0x3f',
+    'snare4c1y4g', 'snare7d2z5h', 'snare2e3a6i', 'snare9f4b7j',
+    'snare6g5c8k', 'snare1h6d9l', 'snare8i7e0m', 'snare0j8f1n',
+    'snare5k9g2o', 'snare3l0h3p', 'snare4m1i4q', 'snare7n2j5r',
+    'snare2o3k6s', 'snare9p4l7t', 'snare6q5m8u', 'snare1r6n9v',
+    'snare8s7o0w', 'snare0t8p1x', 'snare5u9q2y', 'snare3v0r3z',
+    'snare4w1s4a', 'snare7x2t5b', 'snare2y3u6c', 'snare9z4v7d',
+    'snare6a5w8e', 'snare1b6x9f', 'snare8c7y0g', 'snare0d8z1h',
+    'snare5e9a2i', 'snare3f0b3j', 'snare4g1c4k', 'snare7h2d5l',
+    'snare2i3e6m', 'snare9j4f7n', 'snare6k5g8o', 'snare1l6h9p',
+    'snare8m7i0q', 'snare0n8j1r', 'snare5o9k2s', 'snare3p0l3t',
+    'snare4q1m4u', 'snare7r2n5v', 'snare2s3o6w', 'snare9t4p7x',
+    'snare6u5q8y', 'snare1v6r9z', 'snare8w7s0a', 'snare0x8t1b',
+    'snare5y9u2c', 'snare3z0v3d', 'snare4a1w4e', 'snare7b2x5f',
+    'snare2c3y6g', 'snare9d4z7h', 'snare6e5a8i', 'snare1f6b9j',
+    'snare8g7c0k', 'snare0h8d1l', 'snare5i9e2m', 'snare3j0f3n',
+    'snare4k1g4o', 'snare7l2h5p', 'snare2m3i6q', 'snare9n4j7r',
+    'snare6o5k8s', 'snare1p6l9t', 'snare8q7m0u', 'snare0r8n1v',
+    'snare5s9o2w', 'snare3t0p3x', 'snare8a3b4c', 'snare9b5c6d',
+    'snare0c7d8e', 'snare1d9e0f', 'snare2e1f2g', 'snare3f3g4h',
+    'snare4g5h6i', 'snare5h7i8j', 'snare6i9j0k', 'snare7j1k2l',
+    'snare8k3l4m', 'snare9l5m6n', 'snare0m7n8o', 'snare1n9o0p',
+    'snare2o1p2q', 'snare3p3q4r', 'snare4q5r6s', 'snare5r7s8t',
+    'snare6s9t0u', 'snare7t1u2v', 'snare8u3v4w', 'snare9v5w6x',
+    'snare0w7x8y', 'snare1x9y0z', 'snare2y1z2a', 'snare3z3a4b',
+    'snare4a5b6c', 'snare5b7c8d', 'snare6c9d0e', 'snare7d1e2f',
+    'snare8e3f4g', 'snare9f5g6h', 'snare0g7h8i', 'snare1h9i0j',
+    'snare2i1j2k', 'snare3j3k4l', 'snare4k5l6m', 'snare5l7m8n',
+    'snare6m9n0o', 'snare7n1o2p', 'snare8o3p4q', 'snare9p5q6r',
+    'snare0q7r8s', 'snare1r9s0t', 'snare2s1t2u', 'snare3t3u4v',
+    'snare4u5v6w', 'snare5v7w8x', 'snare6w9x0y', 'snare7x1y2z',
+    'snare8y3z4a', 'snare9z5a6b', 'snare0a7b8c', 'snare1b9c0d',
+    'snare2c1d2e', 'snare3d3e4f', 'snare4e5f6g', 'snare5f7g8h',
+    'snare6g9h0i', 'snare7h1i2j', 'snare8i3j4k', 'snare9j5k6l',
+    'snare0k7l8m', 'snare1l9m0n', 'snare2m1n2o', 'snare3n3o4p',
+    'snare4o5p6q', 'snare5p7q8r', 'snare6q9r0s', 'snare7r1s2t',
+    'snare8s3t4u', 'snare9t5u6v', 'snare0u7v8w', 'snare1v9w0x',
+    'snare2w1x2y', 'snare3x3y4z', 'snare4y5z6a', 'snare5z7a8b',
+    'snare6a9b0c', 'snare7b1c2d', 'snare8c3d4e', 'snare9d5e6f',
+    'snare0e7f8g', 'snare1f9g0h', 'snare2g1h2i', 'snare3h3i4j',
+    'snare4i5j6k', 'snare5j7k8l', 'snare6k9l0m', 'snare7l1m2n',
+    'snare8m3n4o', 'snare9n5o6p', 'snare0o7p8q', 'snare1p9q0r',
+    'snare2q1r2s', 'snare3r3s4t', 'snare4s5t6u', 'snare5t7u8v',
+    'snare6u9v0w', 'snare7v1w2x', 'snare8w3x4y', 'snare9x5y6z',
+    'snare0y7z8a', 'snare1z9a0b', 'snare2a1b2c', 'snare3b3c4d',
+    'snare4c5d6e', 'snare5d7e8f', 'snare6e9f0g', 'snare7f1g2h',
+    'snare8g3h4i', 'snare9h5i6j', 'snare0i7j8k', 'snare1j9k0l',
+    'snare2k1l2m', 'snare3l3m4n', 'snare4m5n6o', 'snare5n7o8p',
+    'snare6o9p0q', 'snare7p1q2r', 'snare8q3r4s', 'snare9r5s6t',
+    'snare0s7t8u', 'snare1t9u0v', 'snare2u1v2w', 'snare3v3w4x',
+    'snare4w5x6y', 'snare5x7y8z', 'snare6y9z0a', 'snare7z1a2b',
+    'snare8a9b0c', 'snare9b0c1d', 'snare0c1d2e', 'snare1d2e3f',
+    'snare2e3f4g', 'snare3f4g5h', 'snare4g5h6i', 'snare5h6i7j',
+    'snare6i7j8k', 'snare7j8k9l', 'snare8k9l0m', 'snare9l0m1n',
+    'snare0m1n2o', 'snare1n2o3p', 'snare2o3p4q', 'snare3p4q5r',
+    'snare4q5r6s', 'snare5r6s7t', 'snare6s7t8u', 'snare7t8u9v',
+    'snare8u9v0w', 'snare9v0w1x', 'snare0w1x2y', 'snare1x2y3z',
+    'snare2y3z4a', 'snare3z4a5b', 'snare4a5b6c', 'snare5b6c7d',
+    'snare6c7d8e', 'snare7d8e9f', 'snare8e9f0g', 'snare9f0g1h',
+    'snare0g1h2i', 'snare1h2i3j', 'snare2i3j4k', 'snare3j4k5l',
+    'snare4k5l6m', 'snare5l6m7n', 'snare6m7n8o', 'snare7n8o9p',
+    'snare8o9p0q', 'snare9p0q1r', 'snare0q1r2s', 'snare1r2s3t',
+    'snare2s3t4u', 'snare3t4u5v', 'snare4u5v6w', 'snare5v6w7x',
+    'snare6w7x8y', 'snare7x8y9z', 'snare8y9z0a', 'snare9z0a1b',
+    'snare0a1b2c', 'snare1b2c3d', 'snare2c3d4e', 'snare3d4e5f',
+    'snare4e5f6g', 'snare5f6g7h', 'snare6g7h8i', 'snare7h8i9j',
+    'snare8i9j0k', 'snare9j0k1l', 'snare0k1l2m', 'snare1l2m3n',
+    'snare2m3n4o', 'snare3n4o5p', 'snare4o5p6q', 'snare5p6q7r',
+    'snare6q7r8s', 'snare7r8s9t', 'snare8s9t0u', 'snare9t0u1v',
+    'snare0u1v2w', 'snare1v2w3x', 'snare2w3x4y', 'snare3x4y5z',
+    'snare4y5z6a', 'snare5z6a7b', 'snare6a7b8c', 'snare7b8c9d',
+    'snare8c9d0e', 'snare9d0e1f', 'snare0e1f2g', 'snare1f2g3h',
+    'snare2g3h4i', 'snare3h4i5j', 'snare4i5j6k', 'snare5j6k7l',
+    'snare6k7l8m', 'snare7l8m9n', 'snare8m9n0o', 'snare9n0o1p',
+    'snare0o1p2q', 'snare1p2q3r', 'snare2q3r4s', 'snare3r4s5t',
+    'snare4s5t6u', 'snare5t6u7v', 'snare6u7v8w', 'snare7v8w9x',
+    'snare8w9x0y', 'snare9x0y1z', 'snare0y1z2a', 'snare1z2a3b',
+    'snare2a3b4c', 'snare3b4c5d', 'snare4c5d6e', 'snare5d6e7f',
+    'snare6e7f8g', 'snare7f8g9h', 'snare8g9h0i', 'snare9h0i1j',
+    'snare0i1j2k', 'snare1j2k3l', 'snare2k3l4m', 'snare3l4m5n',
+    'snare4m5n6o', 'snare5n6o7p', 'snare6o7p8q', 'snare7p8q9r',
+    'snare8q9r0s', 'snare9r0s1t', 'snare0s1t2u', 'snare1t2u3v',
+    'snare2u3v4w', 'snare3v4w5x', 'snare4w5x6y', 'snare5x6y7z',
+    'snare6y7z8a', 'snare7z8a9b', 'snare8a9b0c', 'snare9b0c1d',
+    'snare0c1d2e', 'snare1d2e3f', 'snare2e3f4g', 'snare3f4g5h',
+    'snare4g5h6i', 'snare5h6i7j', 'snare6i7j8k', 'snare7j8k9l',
+    'snare8k9l0m', 'snare9l0m1n', 'snare0m1n2o', 'snare1n2o3p',
+    'snare2o3p4q', 'snare3p4q5r', 'snare4q5r6s', 'snare5r6s7t',
+    'snare6s7t8u', 'snare7t8u9v', 'snare8u9v0w', 'snare9v0w1x',
+    'snare0w1x2y', 'snare1x2y3z', 'snare2y3z4a', 'snare3z4a5b',
+    'snare4a5b6c', 'snare5b6c7d', 'snare6c7d8e', 'snare7d8e9f',
+    'snare8e9f0g', 'snare9f0g1h', 'snare0g1h2i', 'snare1h2i3j',
+    'snare2i3j4k', 'snare3j4k5l', 'snare4k5l6m', 'snare5l6m7n',
+    'snare6m7n8o', 'snare7n8o9p', 'snare8o9p0q', 'snare9p0q1r',
+    'snare0q1r2s', 'snare1r2s3t', 'snare2s3t4u', 'snare3t4u5v',
+    'snare4u5v6w', 'snare5v6w7x', 'snare6w7x8y', 'snare7x8y9z',
+    'snare8y9z0a', 'snare9z0a1b', 'snare0a1b2c', 'snare1b2c3d',
+    'snare2c3d4e', 'snare3d4e5f', 'snare4e5f6g', 'snare5f6g7h',
+    'snare6g7h8i', 'snare7h8i9j', 'snare8i9j0k', 'snare9j0k1l',
+    'snare0k1l2m', 'snare1l2m3n', 'snare2m3n4o', 'snare3n4o5p',
+    'snare4o5p6q', 'snare5p6q7r', 'snare6q7r8s', 'snare7r8s9t',
+    'snare8s9t0u', 'snare9t0u1v', 'snare0u1v2w', 'snare1v2w3x',
+    'snare2w3x4y', 'snare3x4y5z', 'snare4y5z6a', 'snare5z6a7b',
+    'snare6a7b8c', 'snare7b8c9d', 'snare8c9d0e', 'snare9d0e1f',
+    'snare0e1f2g', 'snare1f2g3h', 'snare2g3h4i', 'snare3h4i5j',
+    'snare4i5j6k', 'snare5j6k7l', 'snare6k7l8m', 'snare7l8m9n',
+    'snare8m9n0o', 'snare9n0o1p', 'snare0o1p2q', 'snare1p2q3r',
+    'snare2q3r4s', 'snare3r4s5t', 'snare4s5t6u', 'snare5t6u7v',
+    'snare6u7v8w', 'snare7v8w9x', 'snare8w9x0y', 'snare9x0y1z',
+    'snare0y1z2a', 'snare1z2a3b', 'snare2a3b4c', 'snare3b4c5d',
+    'snare4c5d6e', 'snare5d6e7f', 'snare6e7f8g', 'snare7f8g9h',
+    'snare8g9h0i', 'snare9h0i1j', 'snare0i1j2k', 'snare1j2k3l',
+    'snare2k3l4m', 'snare3l4m5n', 'snare4m5n6o', 'snare5n6o7p',
+    'snare6o7p8q', 'snare7p8q9r', 'snare8q9r0s', 'snare9r0s1t',
+    'snare0s1t2u', 'snare1t2u3v', 'snare2u3v4w', 'snare3v4w5x',
+    'snare4w5x6y', 'snare5x6y7z', 'snare6y7z8a', 'snare7z8a9b',
+    'snare8a9b0c', 'snare9b0c1d', 'snare0c1d2e', 'snare1d2e3f',
+    'snare2e3f4g', 'snare3f4g5h', 'snare4g5h6i', 'snare5h6i7j',
+    'snare6i7j8k', 'snare7j8k9l', 'snare8k9l0m', 'snare9l0m1n',
+    'snare0m1n2o', 'snare1n2o3p', 'snare2o3p4q', 'snare3p4q5r',
+    'snare4q5r6s', 'snare5r6s7t', 'snare6s7t8u', 'snare7t8u9v',
+    'snare8u9v0w', 'snare9v0w1x', 'snare0w1x2y', 'snare1x2y3z',
+    'snare2y3z4a', 'snare3z4a5b', 'snare4a5b6c', 'snare5b6c7d',
+    'snare6c7d8e', 'snare7d8e9f', 'snare8e9f0g', 'snare9f0g1h',
+    'snare0g1h2i', 'snare1h2i3j', 'snare2i3j4k', 'snare3j4k5l',
+    'snare4k5l6m', 'snare5l6m7n', 'snare6m7n8o', 'snare7n8o9p',
+    'snare8o9p0q', 'snare9p0q1r', 'snare0q1r2s', 'snare1r2s3t',
+    'snare2s3t4u', 'snare3t4u5v', 'snare4u5v6w', 'snare5v6w7x',
+    'snare6w7x8y', 'snare7x8y9z', 'snare8y9z0a', 'snare9z0a1b',
+    'snare0a1b2c', 'snare1b2c3d', 'snare2c3d4e', 'snare3d4e5f',
+    'snare4e5f6g', 'snare5f6g7h', 'snare6g7h8i', 'snare7h8i9j',
+    'snare8i9j0k', 'snare9j0k1l', 'snare0k1l2m', 'snare1l2m3n',
+    'snare2m3n4o', 'snare3n4o5p', 'snare4o5p6q', 'snare5p6q7r',
+    'snare6q7r8s', 'snare7r8s9t', 'snare8s9t0u', 'snare9t0u1v',
+    'snare0u1v2w', 'snare1v2w3x', 'snare2w3x4y', 'snare3x4y5z',
+    'snare4y5z6a', 'snare5z6a7b', 'snare6a7b8c', 'snare7b8c9d',
+    'snare8c9d0e', 'snare9d0e1f', 'snare0e1f2g', 'snare1f2g3h',
+    'snare2g3h4i', 'snare3h4i5j', 'snare4i5j6k', 'snare5j6k7l',
+    'snare6k7l8m', 'snare7l8m9n', 'snare8m9n0o', 'snare9n0o1p',
+    'snare0o1p2q', 'snare1p2q3r', 'snare2q3r4s', 'snare3r4s5t',
+    'snare4s5t6u', 'snare5t6u7v', 'snare6u7v8w', 'snare7v8w9x',
+    'snare8w9x0y', 'snare9x0y1z', 'snare0y1z2a', 'snare1z2a3b',
+    'snare2a3b4c', 'snare3b4c5d', 'snare4c5d6e', 'snare5d6e7f',
+    'snare6e7f8g', 'snare7f8g9h', 'snare8g9h0i', 'snare9h0i1j',
+    'snare0i1j2k', 'snare1j2k3l', 'snare2k3l4m', 'snare3l4m5n',
+    'snare4m5n6o', 'snare5n6o7p', 'snare6o7p8q', 'snare7p8q9r',
+    'snare8q9r0s', 'snare9r0s1t', 'snare0s1t2u', 'snare1t2u3v',
+    'snare2u3v4w', 'snare3v4w5x', 'snare4w5x6y', 'snare5x6y7z',
+    'snare6y7z8a', 'snare7z8a9b', 'snare8a9b0c', 'snare9b0c1d',
+    'snare0c1d2e', 'snare1d2e3f', 'snare2e3f4g', 'snare3f4g5h',
+    'snare4g5h6i', 'snare5h6i7j', 'snare6i7j8k', 'snare7j8k9l',
+    'snare8k9l0m', 'snare9l0m1n', 'snare0m1n2o', 'snare1n2o3p',
+    'snare2o3p4q', 'snare3p4q5r', 'snare4q5r6s', 'snare5r6s7t',
+    'snare6s7t8u', 'snare7t8u9v', 'snare8u9v0w', 'snare9v0w1x',
+    'snare0w1x2y', 'snare1x2y3z', 'snare2y3z4a', 'snare3z4a5b',
+    'snare4a5b6c', 'snare5b6c7d', 'snare6c7d8e', 'snare7d8e9f',
+    'snare8e9f0g', 'snare9f0g1h', 'snare0g1h2i', 'snare1h2i3j',
+    'snare2i3j4k', 'snare3j4k5l', 'snare4k5l6m', 'snare5l6m7n',
+    'snare6m7n8o', 'snare7n8o9p', 'snare8o9p0q', 'snare9p0q1r',
+    'snare0q1r2s', 'snare1r2s3t', 'snare2s3t4u', 'snare3t4u5v',
+    'snare4u5v6w', 'snare5v6w7x', 'snare6w7x8y', 'snare7x8y9z',
+    'snare8y9z0a', 'snare9z0a1b', 'snare0a1b2c', 'snare1b2c3d',
+    'snare2c3d4e', 'snare3d4e5f', 'snare4e5f6g', 'snare5f6g7h',
+    'snare6g7h8i', 'snare7h8i9j', 'snare8i9j0k', 'snare9j0k1l',
+    'snare0k1l2m', 'snare1l2m3n', 'snare2m3n4o', 'snare3n4o5p',
+    'snare4o5p6q', 'snare5p6q7r', 'snare6q7r8s', 'snare7r8s9t',
+    'snare8s9t0u', 'snare9t0u1v', 'snare0u1v2w', 'snare1v2w3x',
+    'snare2w3x4y', 'snare3x4y5z', 'snare4y5z6a', 'snare5z6a7b',
+    'snare6a7b8c', 'snare7b8c9d', 'snare8c9d0e', 'snare9d0e1f',
+    'snare0e1f2g', 'snare1f2g3h', 'snare2g3h4i', 'snare3h4i5j',
+    'snare4i5j6k', 'snare5j6k7l', 'snare6k7l8m', 'snare7l8m9n',
+    'snare8m9n0o', 'snare9n0o1p', 'snare0o1p2q', 'snare1p2q3r',
+    'snare2q3r4s', 'snare3r4s5t', 'snare4s5t6u', 'snare5t6u7v',
+    'snare6u7v8w', 'snare7v8w9x', 'snare8w9x0y', 'snare9x0y1z',
+    'snare0y1z2a', 'snare1z2a3b', 'snare2a3b4c', 'snare3b4c5d',
+    'snare4c5d6e', 'snare5d6e7f', 'snare6e7f8g', 'snare7f8g9h',
+    'snare8g9h0i', 'snare9h0i1j', 'snare0i1j2k', 'snare1j2k3l',
+    'snare2k3l4m', 'snare3l4m5n', 'snare4m5n6o', 'snare5n6o7p',
+    'snare6o7p8q', 'snare7p8q9r', 'snare8q9r0s', 'snare9r0s1t',
+    'snare0s1t2u', 'snare1t2u3v', 'snare2u3v4w', 'snare3v4w5x',
+    'snare4w5x6y', 'snare5x6y7z', 'snare6y7z8a', 'snare7z8a9b',
+    'snare8a9b0c', 'snare9b0c1d', 'snare0c1d2e', 'snare1d2e3f',
+    'snare2e3f4g', 'snare3f4g5h', 'snare4g5h6i', 'snare5h6i7j',
+    'snare6i7j8k', 'snare7j8k9l', 'snare8k9l0m', 'snare9l0m1n',
+    'snare0m1n2o', 'snare1n2o3p', 'snare2o3p4q', 'snare3p4q5r',
+    'snare4q5r6s', 'snare5r6s7t', 'snare6s7t8u', 'snare7t8u9v',
+    'snare8u9v0w', 'snare9v0w1x', 'snare0w1x2y', 'snare1x2y3z',
+    'snare2y3z4a', 'snare3z4a5b', 'snare4a5b6c', 'snare5b6c7d',
+    'snare6c7d8e', 'snare7d8e9f', 'snare8e9f0g', 'snare9f0g1h',
+    'snare0g1h2i', 'snare1h2i3j', 'snare2i3j4k', 'snare3j4k5l',
+    'snare4k5l6m', 'snare5l6m7n', 'snare6m7n8o', 'snare7n8o9p',
+    'snare8o9p0q', 'snare9p0q1r', 'snare0q1r2s', 'snare1r2s3t',
+    'snare2s3t4u', 'snare3t4u5v', 'snare4u5v6w', 'snare5v6w7x',
+    'snare6w7x8y', 'snare7x8y9z', 'snare8y9z0a', 'snare9z0a1b',
+    'snare0a1b2c', 'snare1b2c3d', 'snare2c3d4e', 'snare3d4e5f',
+    'snare4e5f6g', 'snare5f6g7h', 'snare6g7h8i', 'snare7h8i9j',
+    'snare8i9j0k', 'snare9j0k1l', 'snare0k1l2m', 'snare1l2m3n',
+    'snare2m3n4o', 'snare3n4o5p', 'snare4o5p6q', 'snare5p6q7r',
+    'snare6q7r8s', 'snare7r8s9t', 'snare8s9t0u', 'snare9t0u1v',
+    'snare0u1v2w', 'snare1v2w3x', 'snare2w3x4y', 'snare3x4y5z',
+    'snare4y5z6a', 'snare5z6a7b', 'snare6a7b8c', 'snare7b8c9d',
+    'snare8c9d0e', 'snare9d0e1f', 'snare0e1f2g', 'snare1f2g3h',
+    'snare2g3h4i', 'snare3h4i5j', 'snare4i5j6k', 'snare5j6k7l',
+    'snare6k7l8m', 'snare7l8m9n', 'snare8m9n0o', 'snare9n0o1p',
+    'snare0o1p2q', 'snare1p2q3r', 'snare2q3r4s', 'snare3r4s5t',
+    'snare4s5t6u', 'snare5t6u7v', 'snare6u7v8w', 'snare7v8w9x',
+    'snare8w9x0y', 'snare9x0y1z', 'snare0y1z2a', 'snare1z2a3b',
+    'snare2a3b4c', 'snare3b4c5d', 'snare4c5d6e', 'snare5d6e7f',
+    'snare6e7f8g', 'snare7f8g9h', 'snare8g9h0i', 'snare9h0i1j',
+    'snare0i1j2k', 'snare1j2k3l', 'snare2k3l4m', 'snare3l4m5n',
+    'snare4m5n6o', 'snare5n6o7p', 'snare6o7p8q', 'snare7p8q9r',
+    'snare8q9r0s', 'snare9r0s1t', 'snare0s1t2u', 'snare1t2u3v',
+    'snare2u3v4w', 'snare3v4w5x', 'snare4w5x6y', 'snare5x6y7z',
+    'snare6y7z8a', 'snare7z8a9b', 'snare8a9b0c', 'snare9b0c1d',
+    'snare0c1d2e', 'snare1d2e3f', 'snare2e3f4g', 'snare3f4g5h',
+    'snare4g5h6i', 'snare5h6i7j', 'snare6i7j8k', 'snare7j8k9l',
+    'snare8k9l0m', 'snare9l0m1n', 'snare0m1n2o', 'snare1n2o3p',
+    'snare2o3p4q', 'snare3p4q5r', 'snare4q5r6s', 'snare5r6s7t',
+    'snare6s7t8u', 'snare7t8u9v', 'snare8u9v0w', 'snare9v0w1x',
+    'snare0w1x2y', 'snare1x2y3z', 'snare2y3z4a', 'snare3z4a5b',
+    'snare4a5b6c', 'snare5b6c7d', 'snare6c7d8e', 'snare7d8e9f',
+    'snare8e9f0g', 'snare9f0g1h', 'snare0g1h2i', 'snare1h2i3j',
+    'snare2i3j4k', 'snare3j4k5l', 'snare4k5l6m', 'snare5l6m7n',
+    'snare6m7n8o', 'snare7n8o9p', 'snare8o9p0q', 'snare9p0q1r',
+    'snare0q1r2s', 'snare1r2s3t', 'snare2s3t4u', 'snare3t4u5v',
+    'snare4u5v6w', 'snare5v6w7x', 'snare6w7x8y', 'snare7x8y9z',
+    'snare8y9z0a', 'snare9z0a1b', 'snare0a1b2c', 'snare1b2c3d',
+    'snare2c3d4e', 'snare3d4e5f', 'snare4e5f6g', 'snare5f6g7h',
+    'snare6g7h8i', 'snare7h8i9j', 'snare8i9j0k', 'snare9j0k1l',
+    'snare0k1l2m', 'snare1l2m3n', 'snare2m3n4o', 'snare3n4o5p',
+    'snare4o5p6q', 'snare5p6q7r', 'snare6q7r8s', 'snare7r8s9t',
+    'snare8s9t0u', 'snare9t0u1v', 'snare0u1v2w', 'snare1v2w3x',
+    'snare2w3x4y', 'snare3x4y5z', 'snare4y5z6a', 'snare5z6a7b',
+    'snare6a7b8c', 'snare7b8c9d', 'snare8c9d0e', 'snare9d0e1f',
+    'snare0e1f2g', 'snare1f2g3h', 'snare2g3h4i', 'snare3h4i5j',
+    'snare4i5j6k', 'snare5j6k7l', 'snare6k7l8m', 'snare7l8m9n',
+    'snare8m9n0o', 'snare9n0o1p', 'snare0o1p2q', 'snare1p2q3r',
+    'snare2q3r4s', 'snare3r4s5t', 'snare4s5t6u', 'snare5t6u7v',
+    'snare6u7v8w', 'snare7v8w9x', 'snare8w9x0y', 'snare9x0y1z',
+    'snare0y1z2a', 'snare1z2a3b', 'snare2a3b4c', 'snare3b4c5d',
+    'snare4c5d6e', 'snare5d6e7f', 'snare6e7f8g', 'snare7f8g9h',
+    'snare8g9h0i', 'snare9h0i1j', 'snare0i1j2k', 'snare1j2k3l',
+    'snare2k3l4m', 'snare3l4m5n', 'snare4m5n6o', 'snare5n6o7p',
+    'snare6o7p8q', 'snare7p8q9r', 'snare8q9r0s', 'snare9r0s1t',
+    'snare0s1t2u', 'snare1t2u3v', 'snare2u3v4w', 'snare3v4w5x',
+    'snare4w5x6y', 'snare5x6y7z', 'snare6y7z8a', 'snare7z8a9b',
+    'snare8a9b0c', 'snare9b0c1d', 'snare0c1d2e', 'snare1d2e3f',
+    'snare2e3f4g', 'snare3f4g5h', 'snare4g5h6i', 'snare5h6i7j',
+    'snare6i7j8k', 'snare7j8k9l', 'snare8k9l0m', 'snare9l0m1n',
+    'snare0m1n2o', 'snare1n2o3p', 'snare2o3p4q', 'snare3p4q5r',
+    'snare4q5r6s', 'snare5r6s7t', 'snare6s7t8u', 'snare7t8u9v',
+    'snare8u9v0w', 'snare9v0w1x', 'snare0w1x2y', 'snare1x2y3z',
+    'snare2y3z4a', 'snare3z4a5b', 'snare4a5b6c', 'snare5b6c7d',
+    'snare6c7d8e', 'snare7d8e9f', 'snare8e9f0g', 'snare9f0g1h',
+    'snare0g1h2i', 'snare1h2i3j', 'snare2i3j4k', 'snare3j4k5l',
+    'snare4k5l6m', 'snare5l6m7n', 'snare6m7n8o', 'snare7n8o9p',
+    'snare8o9p0q', 'snare9p0q1r', 'snare0q1r2s', 'snare1r2s3t',
+    'snare2s3t4u', 'snare3t4u5v', 'snare4u5v6w', 'snare5v6w7x',
+    'snare6w7x8y', 'snare7x8y9z', 'snare8y9z0a', 'snare9z0a1b'
+}
+
+local function createNotification(title, content, duration, color, parent)
+    duration = duration or 5
+    color = color or Color3.fromRGB(85, 170, 255)
+    
+    local Notification = Instance.new("Frame")
+    Notification.Name = "Notification"
+    Notification.AnchorPoint = Vector2.new(1, 1)
+    Notification.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    Notification.BorderSizePixel = 0
+    Notification.Position = UDim2.new(1, -25, 1, -25)
+    Notification.Size = UDim2.fromOffset(300, 80)
+    Notification.ZIndex = 100
+    Notification.Parent = parent
+    
+    local NotifStroke = Instance.new("UIStroke")
+    NotifStroke.Color = Color3.fromRGB(60, 60, 60)
+    NotifStroke.Thickness = 1
+    NotifStroke.Parent = Notification
+    
+    local NotifCorner = Instance.new("UICorner")
+    NotifCorner.CornerRadius = UDim.new(0, 12)
+    NotifCorner.Parent = Notification
+    
+    local IconFrame = Instance.new("Frame")
+    IconFrame.Name = "IconFrame"
+    IconFrame.BackgroundColor3 = color
+    IconFrame.Size = UDim2.fromOffset(4, 80)
+    IconFrame.Position = UDim2.fromOffset(0, 0)
+    IconFrame.BorderSizePixel = 0
+    IconFrame.Parent = Notification
+    
+    local IconCorner = Instance.new("UICorner")
+    IconCorner.CornerRadius = UDim.new(0, 12)
+    IconCorner.Parent = IconFrame
+    
+    local TextContainer = Instance.new("Frame")
+    TextContainer.Name = "TextContainer"
+    TextContainer.BackgroundTransparency = 1
+    TextContainer.Position = UDim2.fromOffset(15, 12)
+    TextContainer.Size = UDim2.new(1, -30, 1, -24)
+    TextContainer.Parent = Notification
+    
+    local TitleText = Instance.new("TextLabel")
+    TitleText.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold)
+    TitleText.Text = title
+    TitleText.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TitleText.TextSize = 16
+    TitleText.TextXAlignment = Enum.TextXAlignment.Left
+    TitleText.BackgroundTransparency = 1
+    TitleText.Size = UDim2.new(1, 0, 0, 20)
+    TitleText.Parent = TextContainer
+    
+    local ContentText = Instance.new("TextLabel")
+    ContentText.Name = "ContentText"
+    ContentText.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Regular)
+    ContentText.Text = content
+    ContentText.TextColor3 = Color3.fromRGB(200, 200, 200)
+    ContentText.TextSize = 14
+    ContentText.TextXAlignment = Enum.TextXAlignment.Left
+    ContentText.TextWrapped = true
+    ContentText.BackgroundTransparency = 1
+    ContentText.Position = UDim2.fromOffset(0, 22)
+    ContentText.Size = UDim2.new(1, 0, 1, -22)
+    ContentText.Parent = TextContainer
+    
+    local ProgressBar = Instance.new("Frame")
+    ProgressBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    ProgressBar.BorderSizePixel = 0
+    ProgressBar.Position = UDim2.fromScale(0.05, 0.85)
+    ProgressBar.Size = UDim2.new(0.9, 0, 0, 3)
+    
+    local ProgressFill = Instance.new("Frame")
+    ProgressFill.BackgroundColor3 = color
+    ProgressFill.BorderSizePixel = 0
+    ProgressFill.Size = UDim2.fromScale(1, 1)
+    
+    local ProgressFillCorner = Instance.new("UICorner")
+    ProgressFillCorner.Parent = ProgressFill
+    
+    ProgressFill.Parent = ProgressBar
+    
+    local ProgressBarCorner = Instance.new("UICorner")
+    ProgressBarCorner.Parent = ProgressBar
+    
+    ProgressBar.Parent = Notification
+    
+    local DismissButton = Instance.new("TextButton")
+    DismissButton.Name = "DismissButton"
+    DismissButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    DismissButton.BackgroundTransparency = 1
+    DismissButton.Size = UDim2.fromScale(1, 1)
+    DismissButton.Text = ""
+    DismissButton.ZIndex = 101
+    DismissButton.Parent = Notification
+    
+    TweenService:Create(ProgressFill, TweenInfo.new(duration, Enum.EasingStyle.Linear), {Size = UDim2.new(0, 0, 1, 0)}):Play()
+    
+    task.delay(duration, function()
+        TweenService:Create(Notification, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(1, 25, 1, -25)}):Play()
+        task.wait(0.5)
+        Notification:Destroy()
+    end)
+    
+    DismissButton.MouseButton1Click:Connect(function()
+        TweenService:Create(Notification, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(1, 25, 1, -25)}):Play()
+        task.wait(0.5)
+        Notification:Destroy()
+    end)
+    
+    DismissButton.MouseEnter:Connect(function()
+        TweenService:Create(DismissButton, TweenInfo.new(0.1), {BackgroundTransparency = 0.9}):Play()
+    end)
+    
+    DismissButton.MouseLeave:Connect(function()
+        TweenService:Create(DismissButton, TweenInfo.new(0.1), {BackgroundTransparency = 1}):Play()
+    end)
+    
+    return Notification
+end
+
+local function validateKey(key)
+    if not key or type(key) ~= "string" then
+        return false, "Empty key"
+    end
+    
+    key = string.gsub(key, "%s+", "")
+    
+    if key == "" then
+        return false, "Empty key"
+    end
+    
+    for _, validKey in ipairs(validKeys) do
+        if key == validKey then
+            return true, "Valid key"
+        end
+    end
+    
+    return false, "Invalid key"
+end
+
+local function executeScript(key)
+    if not key or key == "" then
+        return false, "No key provided"
+    end
+    
+    local valid, message = validateKey(key)
+    
+    if not valid then
+        return false, message
+    end
+    
+    local success, errorMessage = pcall(function()
+        local scriptContent = game:HttpGet(ScriptUrl, true)
+        loadstring(scriptContent)()
+    end)
+    
+    if not success then
+        return false, "Script load failed"
+    end
+    
+    return true, "Script loaded"
+end
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "SnareMvsdLogin"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.fromScale(0.5, 0.5)
+MainFrame.Size = UDim2.fromOffset(400, 460)
+MainFrame.Parent = ScreenGui
+
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 16)
+UICorner.Parent = MainFrame
+
+local UIStroke = Instance.new("UIStroke")
+UIStroke.Color = Color3.fromRGB(50, 50, 50)
+UIStroke.Thickness = 2
+UIStroke.Parent = MainFrame
+
+local BackgroundPattern = Instance.new("ImageLabel")
+BackgroundPattern.Name = "BackgroundPattern"
+BackgroundPattern.Image = "rbxassetid://11543912319"
+BackgroundPattern.ImageTransparency = 0.8
+BackgroundPattern.ScaleType = Enum.ScaleType.Tile
+BackgroundPattern.TileSize = UDim2.fromOffset(100, 100)
+BackgroundPattern.BackgroundTransparency = 1
+BackgroundPattern.Size = UDim2.fromScale(1, 1)
+BackgroundPattern.ZIndex = 0
+BackgroundPattern.Parent = MainFrame
+
+local Header = Instance.new("Frame")
+Header.Name = "Header"
+Header.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Header.BorderSizePixel = 0
+Header.Size = UDim2.new(1, 0, 0, 60)
+Header.Parent = MainFrame
+
+local HeaderCorner = Instance.new("UICorner")
+HeaderCorner.CornerRadius = UDim.new(0, 16)
+HeaderCorner.Parent = Header
+
+local TitleLabel = Instance.new("TextLabel")
+TitleLabel.Name = "Title"
+TitleLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Heavy)
+TitleLabel.Text = "SnareMvsd"
+TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TitleLabel.TextSize = 20
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.Position = UDim2.fromOffset(25, 15)
+TitleLabel.Size = UDim2.new(0, 150, 0, 30)
+TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+TitleLabel.Parent = Header
+
+local ControlsFrame = Instance.new("Frame")
+ControlsFrame.Name = "Controls"
+ControlsFrame.BackgroundTransparency = 1
+ControlsFrame.Position = UDim2.new(1, -70, 0, 15)
+ControlsFrame.Size = UDim2.new(0, 55, 0, 30)
+ControlsFrame.Parent = Header
+
+local ControlsLayout = Instance.new("UIListLayout")
+ControlsLayout.FillDirection = Enum.FillDirection.Horizontal
+ControlsLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+ControlsLayout.Padding = UDim.new(0, 8)
+ControlsLayout.SortOrder = Enum.SortOrder.LayoutOrder
+ControlsLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+ControlsLayout.Parent = ControlsFrame
+
+local MinimizeButton = Instance.new("TextButton")
+MinimizeButton.Name = "Minimize"
+MinimizeButton.Text = "-"
+MinimizeButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold)
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinimizeButton.TextSize = 16
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+MinimizeButton.Size = UDim2.fromOffset(20, 20)
+MinimizeButton.AutoButtonColor = false
+MinimizeButton.Parent = ControlsFrame
+
+local MinimizeButtonCorner = Instance.new("UICorner")
+MinimizeButtonCorner.CornerRadius = UDim.new(0, 6)
+MinimizeButtonCorner.Parent = MinimizeButton
+
+local CloseButton = Instance.new("TextButton")
+CloseButton.Name = "Close"
+CloseButton.Text = "×"
+CloseButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold)
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.TextSize = 18
+CloseButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+CloseButton.Size = UDim2.fromOffset(20, 20)
+CloseButton.AutoButtonColor = false
+CloseButton.Parent = ControlsFrame
+
+local CloseButtonCorner = Instance.new("UICorner")
+CloseButtonCorner.CornerRadius = UDim.new(0, 6)
+CloseButtonCorner.Parent = CloseButton
+
+local ContentFrame = Instance.new("Frame")
+ContentFrame.Name = "ContentFrame"
+ContentFrame.BackgroundTransparency = 1
+ContentFrame.Position = UDim2.fromOffset(0, 70)
+ContentFrame.Size = UDim2.new(1, 0, 1, -70)
+ContentFrame.Parent = MainFrame
+
+local GameInfoFrame = Instance.new("Frame")
+GameInfoFrame.Name = "GameInfo"
+GameInfoFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+GameInfoFrame.BorderSizePixel = 0
+GameInfoFrame.Position = UDim2.fromOffset(25, 20)
+GameInfoFrame.Size = UDim2.new(1, -50, 0, 60)
+GameInfoFrame.Parent = ContentFrame
+
+local GameInfoCorner = Instance.new("UICorner")
+GameInfoCorner.CornerRadius = UDim.new(0, 12)
+GameInfoCorner.Parent = GameInfoFrame
+
+local GameIcon = Instance.new("ImageLabel")
+GameIcon.Name = "GameIcon"
+GameIcon.Image = game:GetService("Players"):GetUserThumbnailAsync(Players.LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
+GameIcon.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+GameIcon.BorderSizePixel = 0
+GameIcon.Position = UDim2.fromOffset(10, 10)
+GameIcon.Size = UDim2.fromOffset(40, 40)
+GameIcon.Parent = GameInfoFrame
+
+local GameIconCorner = Instance.new("UICorner")
+GameIconCorner.CornerRadius = UDim.new(0, 8)
+GameIconCorner.Parent = GameIcon
+
+local GameNameLabel = Instance.new("TextLabel")
+GameNameLabel.Name = "GameName"
+GameNameLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.SemiBold)
+GameNameLabel.Text = "Current Game:"
+GameNameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+GameNameLabel.TextSize = 14
+GameNameLabel.TextXAlignment = Enum.TextXAlignment.Left
+GameNameLabel.BackgroundTransparency = 1
+GameNameLabel.Position = UDim2.fromOffset(60, 12)
+GameNameLabel.Size = UDim2.new(1, -70, 0, 18)
+GameNameLabel.Parent = GameInfoFrame
+
+local GameLabel = Instance.new("TextLabel")
+GameLabel.Name = "GameLabel"
+GameLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium)
+GameLabel.Text = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+GameLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+GameLabel.TextSize = 12
+GameLabel.TextXAlignment = Enum.TextXAlignment.Left
+GameLabel.TextTruncate = Enum.TextTruncate.AtEnd
+GameLabel.BackgroundTransparency = 1
+GameLabel.Position = UDim2.fromOffset(60, 30)
+GameLabel.Size = UDim2.new(1, -70, 0, 18)
+GameLabel.Parent = GameInfoFrame
+
+local KeySection = Instance.new("Frame")
+KeySection.Name = "KeySection"
+KeySection.BackgroundTransparency = 1
+KeySection.Position = UDim2.fromOffset(25, 100)
+KeySection.Size = UDim2.new(1, -50, 0, 120)
+KeySection.Parent = ContentFrame
+
+local KeyLabel = Instance.new("TextLabel")
+KeyLabel.Name = "KeyLabel"
+KeyLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.SemiBold)
+KeyLabel.Text = "ENTER YOUR KEY"
+KeyLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+KeyLabel.TextSize = 12
+KeyLabel.TextXAlignment = Enum.TextXAlignment.Left
+KeyLabel.BackgroundTransparency = 1
+KeyLabel.Position = UDim2.fromOffset(0, 0)
+KeyLabel.Size = UDim2.new(1, 0, 0, 20)
+KeyLabel.Parent = KeySection
+
+local KeyTextboxHolder = Instance.new("Frame")
+KeyTextboxHolder.Name = "TextboxHolder"
+KeyTextboxHolder.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+KeyTextboxHolder.BorderSizePixel = 0
+KeyTextboxHolder.Position = UDim2.fromOffset(0, 25)
+KeyTextboxHolder.Size = UDim2.new(1, 0, 0, 50)
+KeyTextboxHolder.Parent = KeySection
+
+local KeyTextboxCorner = Instance.new("UICorner")
+KeyTextboxCorner.CornerRadius = UDim.new(0, 12)
+KeyTextboxCorner.Parent = KeyTextboxHolder
+
+local KeyTextboxStroke = Instance.new("UIStroke")
+KeyTextboxStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+KeyTextboxStroke.Color = Color3.fromRGB(60, 60, 60)
+KeyTextboxStroke.Thickness = 2
+KeyTextboxStroke.Parent = KeyTextboxHolder
+
+local KeyTextbox = Instance.new("TextBox")
+KeyTextbox.Name = "TextBox"
+KeyTextbox.ClearTextOnFocus = false
+KeyTextbox.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium)
+KeyTextbox.PlaceholderColor3 = Color3.fromRGB(120, 120, 120)
+KeyTextbox.PlaceholderText = "Paste your key here..."
+KeyTextbox.Text = ""
+KeyTextbox.TextColor3 = Color3.fromRGB(255, 255, 255)
+KeyTextbox.TextSize = 16
+KeyTextbox.TextXAlignment = Enum.TextXAlignment.Left
+KeyTextbox.BackgroundTransparency = 1
+KeyTextbox.Position = UDim2.fromOffset(20, 0)
+KeyTextbox.Size = UDim2.new(1, -40, 1, 0)
+KeyTextbox.Parent = KeyTextboxHolder
+
+local StatusLabel = Instance.new("TextLabel")
+StatusLabel.Name = "StatusLabel"
+StatusLabel.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium)
+StatusLabel.Text = "Waiting for your key..."
+StatusLabel.TextColor3 = Color3.fromRGB(150, 150, 150)
+StatusLabel.TextSize = 12
+StatusLabel.TextXAlignment = Enum.TextXAlignment.Left
+StatusLabel.BackgroundTransparency = 1
+StatusLabel.Position = UDim2.fromOffset(0, 85)
+StatusLabel.Size = UDim2.new(1, 0, 0, 20)
+StatusLabel.Parent = KeySection
+
+local ValidateButton = Instance.new("TextButton")
+ValidateButton.Name = "Check key"
+ValidateButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold)
+ValidateButton.Text = "Check Key"
+ValidateButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ValidateButton.TextSize = 14
+ValidateButton.BackgroundColor3 = Color3.fromRGB(85, 170, 255)
+ValidateButton.BorderSizePixel = 0
+ValidateButton.Position = UDim2.fromOffset(25, 235)
+ValidateButton.Size = UDim2.new(1, -50, 0, 45)
+ValidateButton.Parent = ContentFrame
+
+local ValidateCorner = Instance.new("UICorner")
+ValidateCorner.CornerRadius = UDim.new(0, 12)
+ValidateCorner.Parent = ValidateButton
+
+local ButtonsContainer = Instance.new("Frame")
+ButtonsContainer.Name = "ButtonsContainer"
+ButtonsContainer.BackgroundTransparency = 1
+ButtonsContainer.Position = UDim2.fromOffset(25, 295)
+ButtonsContainer.Size = UDim2.new(1, -50, 0, 110)
+ButtonsContainer.Parent = ContentFrame
+
+local TopRow = Instance.new("Frame")
+TopRow.Name = "TopRow"
+TopRow.BackgroundTransparency = 1
+TopRow.Size = UDim2.new(1, 0, 0, 40)
+TopRow.Parent = ButtonsContainer
+
+local TopRowLayout = Instance.new("UIGridLayout")
+TopRowLayout.CellPadding = UDim2.fromOffset(10, 0)
+TopRowLayout.CellSize = UDim2.new(0.5, -5, 1, 0)
+TopRowLayout.SortOrder = Enum.SortOrder.LayoutOrder
+TopRowLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+TopRowLayout.Parent = TopRow
+
+local LinkvertiseButton = Instance.new("TextButton")
+LinkvertiseButton.Name = "LinkvertiseButton"
+LinkvertiseButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium)
+LinkvertiseButton.Text = "Get Key (Linkvertise)"
+LinkvertiseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+LinkvertiseButton.TextSize = 11
+LinkvertiseButton.TextWrapped = true
+LinkvertiseButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+LinkvertiseButton.BorderSizePixel = 0
+LinkvertiseButton.Size = UDim2.new(1, 0, 1, 0)
+LinkvertiseButton.Parent = TopRow
+
+local LinkvertiseCorner = Instance.new("UICorner")
+LinkvertiseCorner.CornerRadius = UDim.new(0, 8)
+LinkvertiseCorner.Parent = LinkvertiseButton
+
+local LootlabsButton = Instance.new("TextButton")
+LootlabsButton.Name = "LootlabsButton"
+LootlabsButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium)
+LootlabsButton.Text = "Get Key (Lootlabs)"
+LootlabsButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+LootlabsButton.TextSize = 11
+LootlabsButton.TextWrapped = true
+LootlabsButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+LootlabsButton.BorderSizePixel = 0
+LootlabsButton.Size = UDim2.new(1, 0, 1, 0)
+LootlabsButton.Parent = TopRow
+
+local LootlabsCorner = Instance.new("UICorner")
+LootlabsCorner.CornerRadius = UDim.new(0, 8)
+LootlabsCorner.Parent = LootlabsButton
+
+local BottomRow = Instance.new("Frame")
+BottomRow.Name = "BottomRow"
+BottomRow.BackgroundTransparency = 1
+BottomRow.Position = UDim2.fromOffset(0, 50)
+BottomRow.Size = UDim2.new(1, 0, 0, 40)
+BottomRow.Parent = ButtonsContainer
+
+local DiscordButton = Instance.new("TextButton")
+DiscordButton.Name = "DiscordButton"
+DiscordButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium)
+DiscordButton.Text = "Join Discord"
+DiscordButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+DiscordButton.TextSize = 11
+DiscordButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+DiscordButton.BorderSizePixel = 0
+DiscordButton.Position = UDim2.fromScale(0.25, 0)
+DiscordButton.Size = UDim2.new(0.5, 0, 1, 0)
+DiscordButton.Parent = BottomRow
+
+local DiscordCorner = Instance.new("UICorner")
+DiscordCorner.CornerRadius = UDim.new(0, 8)
+DiscordCorner.Parent = DiscordButton
+
+local dragging = false
+local dragInput
+local dragStart
+local startPos
+
+local function updateDrag(input)
+    local delta = input.Position - dragStart
+    MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+Header.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+Header.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        updateDrag(input)
+    end
+end)
+
+local function applyButtonHoverEffect(button, defaultColor, hoverColor)
+    button.MouseEnter:Connect(function()
+        TweenService:Create(button, TweenInfo.new(0.2), {BackgroundColor3 = hoverColor}):Play()
+    end)
+    
+    button.MouseLeave:Connect(function()
+        TweenService:Create(button, TweenInfo.new(0.2), {BackgroundColor3 = defaultColor}):Play()
+    end)
+end
+
+applyButtonHoverEffect(ValidateButton, Color3.fromRGB(85, 170, 255), Color3.fromRGB(65, 140, 220))
+applyButtonHoverEffect(LinkvertiseButton, Color3.fromRGB(40, 40, 40), Color3.fromRGB(50, 50, 50))
+applyButtonHoverEffect(LootlabsButton, Color3.fromRGB(40, 40, 40), Color3.fromRGB(50, 50, 50))
+applyButtonHoverEffect(DiscordButton, Color3.fromRGB(40, 40, 40), Color3.fromRGB(50, 50, 50))
+applyButtonHoverEffect(CloseButton, Color3.fromRGB(40, 40, 40), Color3.fromRGB(255, 85, 85))
+applyButtonHoverEffect(MinimizeButton, Color3.fromRGB(40, 40, 40), Color3.fromRGB(60, 60, 60))
+
+KeyTextbox.Focused:Connect(function()
+    TweenService:Create(KeyTextboxHolder, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(30, 30, 30)}):Play()
+    TweenService:Create(KeyTextboxStroke, TweenInfo.new(0.3), {Color = Color3.fromRGB(85, 170, 255)}):Play()
+end)
+
+KeyTextbox.FocusLost:Connect(function()
+    TweenService:Create(KeyTextboxHolder, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(25, 25, 25)}):Play()
+    TweenService:Create(KeyTextboxStroke, TweenInfo.new(0.3), {Color = Color3.fromRGB(60, 60, 60)}):Play()
+end)
+
+ValidateButton.MouseButton1Click:Connect(function()
+    local keyText = KeyTextbox.Text
+    
+    if keyText == "" then
+        StatusLabel.Text = "Enter a key"
+        StatusLabel.TextColor3 = Color3.fromRGB(255, 85, 85)
+        createNotification("Error", "Enter your key to continue", 3, Color3.fromRGB(255, 85, 85), ScreenGui)
+        return
+    end
+    
+    StatusLabel.Text = "Checking key..."
+    StatusLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    
+    local valid, message = validateKey(keyText)
+    
+    if not valid then
+        StatusLabel.Text = message
+        StatusLabel.TextColor3 = Color3.fromRGB(255, 85, 85)
+        createNotification("Invalid Key", message, 3, Color3.fromRGB(255, 85, 85), ScreenGui)
+        return
+    end
+    
+    StatusLabel.Text = "Loading SnareMvsd..."
+    StatusLabel.TextColor3 = Color3.fromRGB(85, 255, 127)
+    
+    createNotification("Success", "Loading SnareMvsd...", 3, Color3.fromRGB(85, 255, 127), ScreenGui)
+    
+    local execSuccess, execError = executeScript(keyText)
+    
+    if not execSuccess then
+        StatusLabel.Text = "Load failed"
+        StatusLabel.TextColor3 = Color3.fromRGB(255, 85, 85)
+        createNotification("Script Error", execError, 5, Color3.fromRGB(255, 85, 85), ScreenGui)
+        return
+    end
+    
+    task.delay(2, function()
+        TweenService:Create(MainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.fromOffset(0, 460)}):Play()
+        task.wait(0.5)
+        ScreenGui:Destroy()
+    end)
+end)
+
+LinkvertiseButton.MouseButton1Click:Connect(function()
+    setclipboard("https://linkvertise.com/1400986/OyIukjS6OJhP?o=sharing")
+    createNotification("Link Copied", "Linkvertise URL copied to clipboard", 3, Color3.fromRGB(85, 170, 255), ScreenGui)
+end)
+
+LootlabsButton.MouseButton1Click:Connect(function()
+    setclipboard("https://lootdest.org/s?NfPeo1rV")
+    createNotification("Link Copied", "Lootlabs URL copied to clipboard!", 3, Color3.fromRGB(85, 170, 255), ScreenGui)
+end)
+
+DiscordButton.MouseButton1Click:Connect(function()
+    setclipboard("https://discord.gg/snare")
+    createNotification("Invite Copied", "Discord invite copied to clipboard!", 3, Color3.fromRGB(88, 101, 242), ScreenGui)
+end)
+
+CloseButton.MouseButton1Click:Connect(function()
+    TweenService:Create(MainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.In), {Size = UDim2.fromOffset(0, 460)}):Play()
+    task.wait(0.3)
+    ScreenGui:Destroy()
+end)
+
+MinimizeButton.MouseButton1Click:Connect(function()
+    MainFrame.Visible = false
+    
+    local RestoreButton = Instance.new("TextButton")
+    RestoreButton.Name = "RestoreButton"
+    RestoreButton.Text = "SnareMvsd"
+    RestoreButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    RestoreButton.TextSize = 12
+    RestoreButton.FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold)
+    RestoreButton.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    RestoreButton.BorderSizePixel = 0
+    RestoreButton.Position = UDim2.new(0, 10, 0, 10)
+    RestoreButton.Size = UDim2.fromOffset(100, 30)
+    RestoreButton.Parent = ScreenGui
+    
+    local RestoreCorner = Instance.new("UICorner")
+    RestoreCorner.CornerRadius = UDim.new(0, 8)
+    RestoreCorner.Parent = RestoreButton
+    
+    local RestoreStroke = Instance.new("UIStroke")
+    RestoreStroke.Color = Color3.fromRGB(60, 60, 60)
+    RestoreStroke.Thickness = 1
+    RestoreStroke.Parent = RestoreButton
+    
+    RestoreButton.MouseButton1Click:Connect(function()
+        MainFrame.Visible = true
+        RestoreButton:Destroy()
+    end)
+end)
+
+task.delay(1, function()
+    createNotification("Welcome", "Enter your key to access SnareMvsd", 5, Color3.fromRGB(85, 170, 255), ScreenGui)
+end)
